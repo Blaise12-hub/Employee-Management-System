@@ -11,13 +11,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <style>
-    /* .mt-5{
-        background: gray;
-    } */
+    .container{
+        margin-right:0px;
+    }
     .mb-3{
         width: 30%;
     }
 </style>
+<?php require VIEW_PATH . "/layouts/sidebar.php"; ?> 
+
+
 <body class="container mt-5">
     <h2 class="text-center">Attendance Report</h2>
     <form method="GET" class="mb-3">
@@ -30,12 +33,16 @@
     <table class="table table-bordered">
         <tr>
             <th>Employee Name</th>
+            <th>Date</th>
             <th>Status</th>
+            <th>Arrived at</th>
         </tr>
         <?php foreach ($records as $record): ?>
             <tr>
-                <td><?= $record['name'] ?></td>
+                <td><?= $record['emp_name'] ?></td>
+                <td><?= $record['date'] ?></td>
                 <td><?= $record['status'] ?></td>
+                <td><?= $record['created_at'] ?></td>
             </tr>
         <?php endforeach; ?>
     </table>

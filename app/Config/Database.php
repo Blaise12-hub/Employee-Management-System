@@ -3,7 +3,7 @@
 
  use PDO;
  use PDOException;
- use Dotenv\Dotenv;
+//  use Dotenv\Dotenv;
 
 class Database{
     private $host;
@@ -29,7 +29,7 @@ class Database{
     public function connect(){
         $this->conn = null;
         try{
-            $this->conn = new PDO("mysql:host=" . $this->host . "dbname=" . $ths->db_name, $this->username,$this->password);
+            $this->conn = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->db_name, $this->username,$this->password);
             $this->conn->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
         } catch(PDOException $e){
             die("Database Connection Error:" . $e->getMessage());

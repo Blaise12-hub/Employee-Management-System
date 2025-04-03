@@ -4,6 +4,13 @@ use App\Controllers\EmployeeController;
 use App\Controllers\AttendanceController;
 
 
+// $router->post('/mark-attendance', [AttendanceController::class, 'mark']);
+// $router->get('/mark-attendance', function() {
+//     include __DIR__ . '/../views/mark_attendance.php';
+// });
+
+define('VIEW_PATH',__DIR__ . '/../app/Views');
+
 
 // Get the current URI and remove query strings
 $uri = trim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
@@ -21,7 +28,7 @@ if (isset($routes[$uri])) {
     $controller->$method();
 } else {
     http_response_code(404);
-    echo "404 Not Found";
+    echo "404 Not Found!  Oops,Try again";
 }
 
 

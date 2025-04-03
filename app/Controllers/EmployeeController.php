@@ -7,7 +7,7 @@ class EmployeeController{
     public function index(){
         $employeeModel=new Employee;
         $employees=$employeeModel->getAllEmployees();
-        include __DIR__ . './../Views/employee.php';
+        include __DIR__ . '/../Views/employee.php';
     }
 
     public function addEmployee(){

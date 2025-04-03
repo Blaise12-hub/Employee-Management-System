@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    
-
-
- 
+    <?php require VIEW_PATH . '/layouts/sidebar.php'; ?>
+    <div class="content"></div>
 </body>
-</html>
+</html

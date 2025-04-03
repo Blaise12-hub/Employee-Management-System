@@ -3,6 +3,7 @@ namespace App\Controllers;
 use App\Models\Attendance;
 
 
+
 class AttendanceController {
     public function mark() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -12,8 +13,11 @@ class AttendanceController {
             
             $attendance = new Attendance();
             if ($attendance->markAttendance($employee_id, $date, $status)) {
-                header("Location: /attendance");
+                // header("Location: /mark-attendance");
+                echo "<script>alert('Attendance Marked Successfully, You are marked present'); window.location.href='/mark-attendance';</script>";
                 exit();
+            }else{
+                echo "<script>alert('Attendance already marked for today!'); window.location.href='/mark-attendance';</script>";
             }
         }
     }
