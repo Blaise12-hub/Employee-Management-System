@@ -26,6 +26,7 @@ class AttendanceController {
         $date = $_GET['date'] ?? date('Y-m-d');
         $attendance = new Attendance();
         $records = $attendance->getAttendanceByDate($date);
+        var_dump($records);
         
         include __DIR__ . '/../Views/attendanceReport.php';
     }

@@ -11,7 +11,6 @@ The **Employee Management System** is a web-based application that helps organiz
 ✅ Daily Attendance Tracking\
 ✅ Role-Based Access Control (Admin & Employee)\
 ✅ Leave & Absence Management\
-✅ Payroll Calculation (Future Feature)\
 ✅ Reports & Analytics on Employee Data\
 ✅ Secure Authentication System\
 ✅ User-Friendly Dashboard
@@ -34,7 +33,7 @@ Ensure you have the following installed:
 
 - PHP (>=7.4)
 - MySQL Database
-- Apache Server (XAMPP or WAMP)
+- Apache Server (XAMPP)
 - Composer (for dependency management)
 - Git
 
