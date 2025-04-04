@@ -70,7 +70,7 @@
                      data-emp_email="<?= htmlspecialchars($employee['emp_email']) ?>"
                      data-department="<?= htmlspecialchars($employee['department']) ?>">Edit</button>
                      
-                    <button class="btn btn-danger delete-employee"><a href="/employees/delete?id=<?= $employee['emp_id']; ?>" onclick="return confirm('Are you sure?')">Delete</a></button>
+                    <button class="btn btn-danger delete-employee" onclick="confirmDelete(<?= $employee['emp_id']; ?>)">Delete</button>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -234,7 +234,7 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
             console.log("response",response);
-              if(response.success){
+              if(response && response.success){
                 alert('Employee updated successfully!');   
                  // auto refresh
                  location.reload();
@@ -385,6 +385,42 @@ $(document).ready(function() {
         
     });
 });
+
+// deleting
+function confirmDelete(empId) {
+    if (confirm("Are you sure you want to delete this employee?")) {
+        $.ajax({
+            url: '/employees/delete?id=' + empId,
+            method: 'DELETE',
+            datatype: 'JSON',
+            success: function(response) {
+                console.log('ajax success', response);
+
+                if (response && response.success) {
+                    console.log('Employee deleted successfully');
+
+                    $('#employeeRow_' + empId).remove();
+ 
+                    alert('Employee deleted successfully!');
+
+                    $('#viewEmployeeModal').modal('hide');
+                } else {
+                    alert('Error deleting employee: ' + (response.error || 'Unknown error'));
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX request failed');
+                console.error('AJAX Error, Status:', status, error);
+                console.error('Response text:', xhr.responseText);
+                alert('Error deleting employee: ' + error);
+            }
+        });
+    }
+}
+
+
+
+
 
 </script>
 </body>

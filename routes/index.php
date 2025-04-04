@@ -20,6 +20,7 @@ $routes = [
     'employees/add'     => [EmployeeController::class, 'addEmployee'],
     'employees/update'  => [EmployeeController::class, 'updateEmployee'],
     'employees/view'    => [EmployeeController::class, 'getEmployee'],
+    'employees/delete'  => [EmployeeController::class, 'deleteEmployee'],
     'attendance'        => [AttendanceController::class, 'report'],
     'attendance/mark'   => [AttendanceController::class, 'mark'],
     'mark-attendance'   => function(){

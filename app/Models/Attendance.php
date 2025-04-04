@@ -37,24 +37,29 @@ class Attendance {
         return $stmt->execute();
     }
 
-    public function getAttendanceByDate($date) {
-        // $query = "SELECT employee.emp_name,attendance.status, attendance.date,attendance.created_at 
-        //           FROM " . $this->table . " 
-        //           INNER JOIN employee ON attendance.employee_id = employee_id 
-        //           WHERE attendance.date = :date";
+    public function getAttendanceByDateRange($start_date,$end_date) {
+
            $query="SELECT e.emp_name,a.status,a.date,a.created_at 
-                   FROM " . $this->table . " a INNER JOIN employee e ON a.employee_id = employee_id
-                   WHERE a.date = :date";
+                   FROM " . $this->table . " a INNER JOIN employee e ON a.employee_id = e.emp_id
+                   WHERE a.date BETWEEN :start_date AND :end_date ORDER BY a.date ASC";
+
         $stmt = $this->conn->prepare($query);
-        $stmt->bindParam(':date', $date);
-        $stmt->execute();
 
-        // return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        error_log("Start Date: " . $start_date);
+        error_log("End Date: " .  $end_date);
+
+        $success = $stmt->execute([
+            ':start_date' => $start_date,
+            ':end_date' => $end_date
+        ]);
+        if (!$success) {
+            die("Query Execution Error: " . implode(" ", $stmt->errorInfo()));
+        }
         $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-        
-    // Debugging output to check fetched data
-    error_log("Fetched Records: " . print_r($records, true));
+        // $records = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($records === false) {
+            die("Fetch Error: " . implode(" ", $stmt->errorInfo()));
+        }
 
     return $records;
     }

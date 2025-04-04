@@ -7,7 +7,7 @@ use App\Models\Attendance;
 class AttendanceController {
     public function mark() {
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $employee_id = $_POST['employee_id'];
+            $employee_id = $_POST['employee_id'] ?? null;
             $date = $_POST['date'];
             $status = $_POST['status'];
             
@@ -19,14 +19,25 @@ class AttendanceController {
             }else{
                 echo "<script>alert('Attendance already marked for today!'); window.location.href='/mark-attendance';</script>";
             }
+            exit();
         }
     }
 
     public function report() {
-        $date = $_GET['date'] ?? date('Y-m-d');
+        $start_date = $_GET['start_date'] ?? date('Y-m-d');
+        $end_date = $_GET['end_date'] ?? date('Y-m-d');
+
+        if (!strtotime($start_date) || !strtotime($end_date)) {
+            die("Invalid date format. Please use YYYY-MM-DD");
+        }
+
         $attendance = new Attendance();
-        $records = $attendance->getAttendanceByDate($date);
-        var_dump($records);
+
+        // Debugging output to ensure parameters are being bound
+        error_log("Bound Params - Start Date: $start_date, End Date: $end_date");
+
+        $records = $attendance->getAttendanceByDateRange($start_date,$end_date);
+        // var_dump($records);
         
         include __DIR__ . '/../Views/attendanceReport.php';
     }

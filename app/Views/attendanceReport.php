@@ -24,20 +24,26 @@
 <body class="container mt-5">
     <h2 class="text-center">Attendance Report</h2>
     <form method="GET" class="mb-3">
-        <label for="date">Select Date:</label>
-        <input type="date" name="date" id="date" class="form-control" required>
+        <label for="date">Start Date:</label>
+        <input type="date" name="start_date" id="date" class="form-control" required>
+
+        <label for="date">End Date:</label>
+        <input type="date" name="end_date" id="date" class="form-control" required>
+
+        
         <button type="submit" class="btn btn-primary mt-2">Filter</button>
     </form>
 
     <?php if(!empty($records)): ?>
+        
     <table class="table table-bordered">
         <tr>
             <th>Employee Name</th>
             <th>Date</th>
             <th>Status</th>
-            <th>Arrived at</th>
+            <th>Arrived at</th> 
         </tr>
-        <?php foreach ($records as $record): ?>
+        <?php foreach ($records as $record):?>
             <tr>
                 <td><?= $record['emp_name'] ?></td>
                 <td><?= $record['date'] ?></td>
@@ -48,7 +54,7 @@
     </table>
 
     <?php else: ?>
-    <p class="alert alert-warning">No Employees found</p>
+    <p class="alert alert-warning w-50">No Employees found</p>
 
     <?php endif; ?>
 

@@ -31,7 +31,7 @@ class EmployeeController{
             $result = $this->employeeModel->addEmployee($name, $email, $department);
 
             if ($result) {
-                echo json_encode(['success' => true,'data'=>$employee]);
+                echo json_encode(['success' => true,'data'=>$result]);
             } else {
                 echo json_encode(['success' => false, 'error' => 'Failed to add employee']);
             }
@@ -67,6 +67,17 @@ class EmployeeController{
         }
     }
     public function deleteEmployee(){
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            die("Invalid request. Employee ID is required.");
+        }
+
+        $id = $_GET['id'];
+
+        if ($this->employeeModel->deleteEmployee($id)) {
+            echo "<script>alert('Employee deleted successfully.'); window.location.href='/employees';</script>";
+        } else {
+            echo "<script>alert('Failed to delete employee. Please try again.'); window.location.href='/employees';</script>";
+        }
 
     }
     public function updateEmployee() {
